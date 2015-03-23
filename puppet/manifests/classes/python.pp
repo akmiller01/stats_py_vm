@@ -86,10 +86,19 @@ class python {
                 provider => pip,
                 require => Package['python-pip']
             }
-            package { 'bokeh':
+            package { 'jsonschema':
                 ensure => installed,
                 provider => pip,
                 require => Package['python-pip']
+            }
+            exec {'sudo pip install -q bokeh':
+                command => 'pip install -q bokeh',
+                user => root
+            }
+            package { 'bokeh':
+                ensure => installed,
+                provider => pip,
+                require => [Exec['sudo pip install -q bokeh'],Package['python-pip']]
             }
             package { 'statsmodels':
                 ensure => installed,

@@ -93,7 +93,8 @@ class python {
             }
             exec {'sudo pip install -q bokeh':
                 command => 'pip install -q bokeh',
-                user => root
+                user => root,
+                require => Package['python-pip']
             }
             package { 'bokeh':
                 ensure => installed,
